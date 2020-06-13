@@ -22,13 +22,8 @@ abstract class SwipeDismissBaseActivity : AppCompatActivity() {
             velocityY: Float
         ): Boolean {
 
-            // Check movement along the Y-axis. If it exceeds SWIPE_MAX_OFF_PATH,
-            // then dismiss the swipe.
             if (Math.abs(e1.y - e2.y) > SWIPE_MAX_OFF_PATH) return false
 
-            // Swipe from left to right.
-            // The swipe needs to exceed a certain distance (SWIPE_MIN_DISTANCE)
-            // and a certain velocity (SWIPE_THRESHOLD_VELOCITY).
             if (e2.x - e1.x > SWIPE_MIN_DISTANCE && Math.abs(
                     velocityX
                 ) > SWIPE_THRESHOLD_VELOCITY
@@ -41,10 +36,8 @@ abstract class SwipeDismissBaseActivity : AppCompatActivity() {
     }
 
     override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
-        // TouchEvent dispatcher.
         if (gestureDetector != null) {
-            if (gestureDetector!!.onTouchEvent(ev)) // If the gestureDetector handles the event, a swipe has been
-            // executed and no more needs to be done.
+            if (gestureDetector!!.onTouchEvent(ev))
                 return true
         }
         return super.dispatchTouchEvent(ev)
